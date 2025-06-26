@@ -1,0 +1,9 @@
+#!/bin/sh
+# Abort the commit if Signed-off-by line is missing
+if ! grep -iq "^Signed-off-by:" "$1"; then
+  cat >&2 <<'EOF'
+❌  Commit rejected: no Signed-off-by line detected.
+➡️  Use 'git commit -s'  OR  run: curl -fsSL https://raw.githubusercontent.com/OpenCHAMI/.github/main/scripts/setup-dco.sh | bash
+EOF
+  exit 1
+fi
